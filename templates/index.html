@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>MNIST CHECK</title>
+    </head>
+    <body>
+        <form action="/send" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*">
+            <button type="submit">送信</button>
+        </form>
+        <p> {{ text }}</p>
+    </body>
+</html>
+
