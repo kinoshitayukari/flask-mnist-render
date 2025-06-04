@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 from tensorflow.keras.models import load_model
 from PIL import Image
 
-SIZE = 28
+SIZE = 54
 
 app = Flask(__name__)
 
@@ -21,7 +21,9 @@ def predict():
     text = 'ファイルが正しく選択されていません'
     if image:
         img = Image.open(image).convert('L').resize((SIZE, SIZE))
-        pred = model.predict(np.array(img).reshape(1, SIZE, SIZE))
+        arr = np.array(img, dtype=np.float32) / 255.0
+        arr = arr.reshape(1, SIZE, SIZE, 1)
+        pred = model.predict(arr)
         text = '{}が予測されました'.format(np.argmax(pred))
     return render_template('index.html', text=text)
 
